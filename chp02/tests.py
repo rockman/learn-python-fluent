@@ -100,3 +100,33 @@ class Chp02Tests(unittest.TestCase):
         good_list_of_lists = [list('_') * 3 for i in range(2)]
         good_list_of_lists[0][0] = 'X'
         self.assertEqual(good_list_of_lists[1][0], '_')
+
+    def test_modifying_tuple(self):
+        t = ('a', 42, [1, 2, 3])
+
+        try:
+            t[2] += [4, 5, 6]
+        except TypeError:
+            assert t == ('a', 42, [1, 2, 3, 4, 5, 6]) # both exception thrown and tuple modified
+        else:
+            assert False
+
+    def test_bisect(self):
+        import bisect
+        
+        haystack = [3, 5, 10, 11]
+        
+        assert bisect.bisect(haystack, 1) == 0
+        assert bisect.bisect(haystack, 5) == 2
+        assert bisect.bisect_left(haystack, 5) == 1
+        assert bisect.bisect_right(haystack, 5) == 2
+
+        bisect.insort_left(haystack, 5)
+        assert haystack == [3, 5, 5, 10, 11]
+        
+        bisect.insort_right(haystack, 12)
+        assert haystack == [3, 5, 5, 10, 11, 12]
+
+    def test_sorting_mix_bad_lists(self):
+        values = [1, 2, '3', 4, '5', 6, '7', '8']        
+        assert sorted(values, key=int, reverse=True) == ['8', '7', 6, '5', 4, '3', 2, 1]
