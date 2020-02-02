@@ -91,10 +91,10 @@ def test_methodcaller():
     from operator import methodcaller
 
     upper = methodcaller('upper')
-    hiphenate = methodcaller('replace', ' ', '-')
+    hyphenate = methodcaller('replace', ' ', '-')
 
     assert upper('hello') == 'HELLO'
-    assert hiphenate('home sweet home') == 'home-sweet-home'
+    assert hyphenate('home sweet home') == 'home-sweet-home'
 
 
 def test_partial():
